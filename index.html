@@ -30,8 +30,19 @@
   .project-links a:hover { text-decoration: underline; }
   .tag { font-size: 11px; color: #999; font-weight: 400; margin-left: 6px; }
 
+  /* Skills notes (toggled by #skills-toggle) */
+  .project-skills, .course-skills {
+    display: none;
+    font-size: 12px; color: #888; line-height: 1.5;
+    margin-top: 4px; padding-left: 2px;
+  }
+  .course-skills { margin: -3px 0 6px 0; }
+  body:has(#skills-toggle:checked) .project-skills,
+  body:has(#skills-toggle:checked) .course-skills { display: block; }
+  .skills-note-label { color: #aaa; }
+
   /* Filter bar */
-  .filter-bar { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 1.2rem; }
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 7px; align-items: center; margin-bottom: 0.8rem; }
   .filter-label { font-size: 12px; color: #999; margin-right: 2px; }
   .filter-chip {
     display: inline-flex; align-items: center; gap: 5px;
@@ -45,6 +56,19 @@
   .filter-chip:has(input:checked) { border-color: var(--c); background-color: var(--cb); }
   .filter-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--c); flex-shrink: 0; }
   .filter-chip input { display: none; }
+
+  /* Skills toggle */
+  .skills-toggle-row { margin-bottom: 0.8rem; }
+  .skills-toggle-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-family: inherit; font-weight: 700;
+    padding: 4px 12px; border: 1px solid #999; border-radius: 20px;
+    cursor: pointer; user-select: none; color: #333;
+    transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+  }
+  .skills-toggle-chip:hover { border-color: #555; }
+  .skills-toggle-chip:has(input:checked) { background-color: #111; border-color: #111; color: #fff; }
+  .skills-toggle-chip input { display: none; }
 
   @media (max-width: 500px) {
     .course-row { flex-direction: column; gap: 2px; }
@@ -74,6 +98,10 @@
     <img src="ProfilePicture.jpeg" alt="Björn Pettersson" style="width:88px; height:88px; border-radius:50%; object-fit:cover; flex-shrink:0; margin-left:1.5rem; margin-right:20px;">
   </div>
 
+  <div class="skills-toggle-row">
+    <label class="skills-toggle-chip"><input type="checkbox" id="skills-toggle"> Show tech skills</label>
+  </div>
+
   <div class="filter-bar">
     <span class="filter-label">Click to highlight:</span>
     <label class="filter-chip" style="--c:#4caf50;--cb:#f0faf0"><span class="dot"></span><input type="checkbox" value="math"> Math</label>
@@ -90,16 +118,19 @@
   <div class="project-row" data-tags="data,economics,code,ai,cs">
     <div class="project-title">Enyday &mdash; BA Thesis: Energy Arbitrage &amp; Ancillary Services <span class="tag">2026</span></div>
     <div class="project-desc">MILP optimisation model in Python on real 2025 operational data (tariff structures, spot prices, frequency data) evaluating FCR-D, aFRR, and spot arbitrage stacking for behind-the-meter battery assets in DK2.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> Python &middot; MILP optimisation &middot; Pyomo &middot; HiGHS solver (via Appsi_HiGHS) &middot; pandas, numpy &middot; time-series data processing</div>
   </div>
 
   <div class="project-row" data-tags="economics">
     <div class="project-title">Enyday &mdash; Market Research / Business Developer <span class="tag">2021&ndash;2023</span></div>
     <div class="project-desc">Market entry and regulatory research (EU REDII, ESG, taxonomy frameworks), business case development, and VC pitch prep for an energy company, part-time alongside studies.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> Market &amp; regulatory research (EU REDII, ESG, taxonomy) &middot; business case development &middot; investor pitch prep</div>
   </div>
 
   <div class="project-row" data-tags="code,ai,cs">
     <div class="project-title">Bollinger Grohmann &mdash; Research Assistant (w/ Berlin University of the Arts) <span class="tag">2021&ndash;2022</span></div>
     <div class="project-desc">Co-developed PUG, a DQN reinforcement learning plugin for generative design in Rhino/Grasshopper, published on Food4Rhino. Co-authored paper presented at the Design Modelling Symposium Berlin.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> C# / .NET &middot; TensorFlow.NET &middot; Rhino/Grasshopper plugin development &middot; deep Q-learning (DQN)</div>
     <div class="project-links"><a href="https://www.researchgate.net/publication/363646896_A_Flexible_Reinforcement_Learning_Framework_to_Implement_Cradle-to-Cradle_in_Early_Design_Stages" target="_blank" rel="noopener noreferrer">article</a> <a href="https://www.food4rhino.com/en/app/pug" target="_blank" rel="noopener noreferrer">plugin</a></div>
   </div>
 
@@ -109,24 +140,28 @@
   <div class="project-row" data-tags="data,economics,code,ai,cs">
     <div class="project-title">Aggregated FCR-D participation for BTM energy communities <span class="tag">2026</span></div>
     <div class="project-desc">BA thesis with Enyday. MILP model for FCR-D up, down, and spot arbitrage stacking for behind-the-meter energy communities in DK2. Uses real 2025 operational data.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> Python &middot; MILP optimisation &middot; Pyomo &middot; HiGHS solver (via Appsi_HiGHS) &middot; pandas, numpy &middot; time-series ingestion &amp; processing</div>
     <div class="project-links"><a href="Aggregated%20FCR-D%20participation%20for%20BTM%20energy%20communities/Aggregated_FCRD_participation_for_BTM_energy_communities.pdf" target="_blank" rel="noopener noreferrer">report</a> <a href="https://github.com/Bjorn-Pettersson/Aggregated-FCR-D-participation-for-BTM-energy-communities/blob/main/Aggregated_FCRD_participation_for_BTM_energy_communities.pdf" target="_blank" rel="noopener noreferrer">code</a></div>
   </div>
 
   <div class="project-row" data-tags="code,cool">
     <div class="project-title">100M: Generative design for refugee camps <span class="tag">2022&ndash;2023</span></div>
     <div class="project-desc">Generative deisgn using wave function collapse for refugee camp planning. Built as a generative design tool in collaboration with CARE.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> Python &middot; wave function collapse algorithm &middot; generative design tooling &middot; Rhino/Grasshopper (confirm)</div>
     <div class="project-links"><a href="100M/20230506_Presentation.pdf" target="_blank" rel="noopener noreferrer">presentation</a> <a href="https://github.com/Bjorn-Pettersson/100M/blob/master/README.md" target="_blank" rel="noopener noreferrer">code</a></div>
   </div>
 
   <div class="project-row" data-tags="code,cs,ai">
     <div class="project-title">PUG: Deep Q-Learning for architectural design <span class="tag">2021</span></div>
     <div class="project-desc">Co authored with Diego Apellániz through reserach assistant role. Reinforcement learning agent for generative spatial layout, published as a flexible reinforcement learning framework for cradle-to-cradle design.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> C# / .NET &middot; TensorFlow.NET &middot; Rhino/Grasshopper plugin development &middot; deep Q-learning (DQN)</div>
     <div class="project-links"><a href="https://www.researchgate.net/publication/363646896_A_Flexible_Reinforcement_Learning_Framework_to_Implement_Cradle-to-Cradle_in_Early_Design_Stages" target="_blank" rel="noopener noreferrer">article</a> <a href="https://www.food4rhino.com/en/app/pug" target="_blank" rel="noopener noreferrer">plugin</a></div>
   </div>
 
   <div class="project-row" data-tags="code,ai,cs">
     <div class="project-title">Ironic productivity app (for personal exploration) <span class="tag">2025</span></div>
     <div class="project-desc">Personal exploration of full-stack web development with GitHub Copilot. An ironic app that fights dark patterns with dark patterns.</div>
+    <div class="project-skills"><span class="skills-note-label">Skills:</span> TypeScript &middot; Next.js (App Router) &middot; React &middot; Prisma ORM &middot; PostgreSQL &middot; NextAuth (Google OAuth) &middot; Tailwind CSS &middot; Vercel deployment</div>
     <div class="project-links"><a href="https://productivity-wheel-coral.vercel.app/" target="_blank" rel="noopener noreferrer">app</a> <a href="https://github.com/Bjorn-Pettersson/productivity-wheel" target="_blank" rel="noopener noreferrer">code</a></div>
   </div>
 
@@ -143,6 +178,7 @@
     <span class="course-name">Advanced deep learning<span class="tag">MoE &middot; transformer routing</span></span>
     <span class="course-links"><a href="adv%20deep%20L/A%20transparent%20MoE%20for%20sequence-level%20routing%20paper.pdf" target="_blank" rel="noopener noreferrer">syllabus</a> <a href="adv%20deep%20L/A%20transparent%20MoE%20for%20sequence-level%20routing%20paper.pdf" target="_blank" rel="noopener noreferrer">report</a> <a href="https://github.com/Bjorn-Pettersson/A_TRANSPARENT_MOE" target="_blank" rel="noopener noreferrer">code</a></span>
   </div>
+  <div class="course-skills"><span class="skills-note-label">Skills:</span> Python &middot; PyTorch &middot; transformer architectures &middot; mixture-of-experts routing &middot; experiment tooling</div>
   <div class="course-row" data-tags="economics">
     <span class="course-name">Mechanism design</span>
     <span class="course-links"><a href="mechanism%20design/SNU_TopicsInMicro_ReserachProposal.pdf" target="_blank" rel="noopener noreferrer">syllabus</a> <a href="mechanism%20design/SNU_TopicsInMicro_ReserachProposal.pdf" target="_blank" rel="noopener noreferrer">proposal</a> <a href="mechanism%20design/topicsInMicroPresentation_4.pdf" target="_blank" rel="noopener noreferrer">slides</a></span>
@@ -185,6 +221,7 @@
     <span class="course-name">High performance programming and systems</span>
     <span class="course-links"><a href="https://kurser.ku.dk/course/ndab20001u" target="_blank" rel="noopener noreferrer">syllabus</a> <a href="high%20performance%20programming/Exam-hpps.pdf" target="_blank" rel="noopener noreferrer">exam</a> <a href="https://github.com/Bjorn-Pettersson/HPPS_EXAM" target="_blank" rel="noopener noreferrer">code</a></span>
   </div>
+  <div class="course-skills"><span class="skills-note-label">Skills:</span> C &middot; OpenMP &middot; parallel &amp; systems programming &middot; Linux toolchain, make (inferred)</div>
   <div class="course-row" data-tags="economics,data">
     <span class="course-name">Econometrics A</span>
     <span class="course-links"><a href="https://kurser.ku.dk/course/ndab20005u" target="_blank" rel="noopener noreferrer">syllabus</a></span>
