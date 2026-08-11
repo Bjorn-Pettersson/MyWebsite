@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "architecture.bjornpettersson.dev" }],
+      "destination": "/architecture/$1"
+    }
+  ]
+}
